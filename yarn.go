@@ -8,7 +8,7 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"github.com/rgobbo/go-yarn/extractor"
+	"github.com/rgobbo/fileutils/extractor"
 	"github.com/rgobbo/fileutils"
 	"strings"
 )
