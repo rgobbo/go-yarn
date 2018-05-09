@@ -11,6 +11,7 @@ import (
 	"github.com/rgobbo/fileutils/extractor"
 	"github.com/rgobbo/fileutils"
 	"strings"
+	"path"
 )
 
 //Yarn - Struture to hold yarn.json configuration
@@ -90,7 +91,7 @@ func YarnInstall(confPath string, publishPath string) error {
 			if key == version {
 				err := DownloadFile(ver.Distrib.Tarball, publishPath +dep.Lib+".tgz")
 				if err != nil {
-					return fmt.Errorf("error download dependencie %v -version %v , url : %v", dep.Lib, version, ver.Distrib.Tarball)
+					return fmt.Errorf("download dependencie %v -version %v , url : %v, error : %v", dep.Lib, version, ver.Distrib.Tarball, err)
 				}
 				ext := extractor.NewTgz()
 				err = ext.Extract(publishPath+dep.Lib+".tgz", publishPath + "tmp")
@@ -125,6 +126,15 @@ func YarnInstall(confPath string, publishPath string) error {
 
 //DownloadFile - function to downlaod and save file from a given url
 func DownloadFile(url string, fileName string) error {
+
+	dir := path.Dir(fileName)
+
+	if _, err := os.Stat(dir); os.IsNotExist(err) {
+		pathErr := os.MkdirAll(dir,0777)
+		if pathErr != nil {
+			return pathErr
+		}
+	}
 
 	output, err := os.Create(fileName)
 	if err != nil {
