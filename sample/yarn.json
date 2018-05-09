@@ -2,13 +2,13 @@
   "dependencies": [
     {
       "lib": "angular",
-      "version": "1.6.4",
-      "resolved": "https://registry.npmjs.org/angular/-/angular-1.6.4.tgz"
+      "version": "1.6.4"
+
     },
     {
       "lib": "jquery",
-      "version": "3.2.1",
-      "resolved": "https://registry.npmjs.org/jquery/-/jquery-3.2.1.tgz"
+      "version": "3.2.1"
+
     }
   ]
 }
